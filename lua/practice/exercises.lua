@@ -182,7 +182,7 @@ return {
             "const test = {",
             "    2,",
             "    3,",
-            "    4,"
+            "    4,",
             "};",
         },
         expected = {
@@ -340,6 +340,23 @@ return {
             "V2j selects the first three lines",
             "vip selects the current paragraph",
             ":%s/Bob/Alice/g changes all occurrences of Bob to Alice",
+        },
+    },
+    {
+        input = {
+            "This sentence would be better (no it wouldn't) without the part in the parentheses.",
+        },
+        expected = {
+            "This sentence would be better without the part in the parentheses.",
+        },
+        instructions = {
+            "Remove the parentheses and their content",
+            "",
+            "tips:",
+            "dib deletes the text inside the parentheses",
+            "dab deletes the parentheses and their content",
+            "cib changes the text inside the parentheses",
+            "cab changes the parentheses and their content",
         },
     },
 }
