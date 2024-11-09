@@ -12,7 +12,7 @@ M.open = function(num)
 
     local function begin()
         local exercise = randomized[completed + 1]
-        practice.open(exercise.input, exercise.expected, exercise.instructions, function(result)
+        practice.open(exercise, function(result)
             table.insert(results, result)
             completed = completed + 1
             if completed == #randomized then

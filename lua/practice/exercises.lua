@@ -198,4 +198,29 @@ return {
             'ca" 1',
         },
     },
+    {
+        input = {
+            "const test = {",
+            "    two: 2,",
+            "    three: 3",
+            "};",
+        },
+        expected = {
+            "const test = {",
+            "    one: 1,",
+            "    two: 2,",
+            "    three: 3",
+            "};",
+        },
+        cursor = {
+            line = 4,
+            col = 0,
+            instructions = "You will be moved to the }",
+        },
+        instructions = {
+            "Add a new line with 'one: 1,'",
+            "o to open a new line below the cursor",
+            "% to jump to the matching parenthesis",
+        },
+    },
 }
