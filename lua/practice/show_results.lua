@@ -1,8 +1,4 @@
 local show_results = function(results)
-    for i = 1, #results do
-        print(results[i])
-    end
-
     local width = 40
     local height = #results + 2
     local row = math.floor((vim.o.lines - height) / 2)
