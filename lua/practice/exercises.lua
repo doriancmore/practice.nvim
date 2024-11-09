@@ -270,4 +270,76 @@ return {
             "Control-X to decrement the number under the cursor",
         },
     },
+    {
+        input = {
+            "vim.keymap.set('n', 'gf', function()"
+            "    print('Go to file')"
+            "end, { noremap = true })",
+            "",
+            "vim.keymap.set({'i', 'c'}, 'jj', '<esc>', {})",
+        },
+        expected = {
+            "vim.keymap.set({'i', 'c'}, 'jk', '<esc>', {})",
+        },
+        instructions = {
+            "Delete the first key binding",
+            "",
+            "tips:",
+            "dip deletes the current paragraph",
+            "dd deletes a line",
+            "d3d deletes 3 lines",
+        },
+    },
+    {
+        input = {
+            "Duplicate",
+            "this",
+            "paragraph",
+            "",
+            "Not this though",
+        },
+        expected = {
+            "Duplicate",
+            "this",
+            "paragraph",
+            "Duplicate",
+            "this",
+            "paragraph",
+            "",
+            "Not this though",
+        },
+        instructions = {
+            "Duplicate the first three lines",
+            "",
+            "tips:",
+            "yip copies the current paragraph",
+            "P pastes the copied paragraph above the cursor",
+        },
+    },
+    {
+        input = {
+            "Bob likes vim",
+            "Bob likes linux",
+            "Bob likes tmux",
+            "",
+            "Alice and Bob are friends",
+        },
+        expected = {
+            "Alice likes vim",
+            "Alice likes linux",
+            "Alice likes tmux",
+            "",
+            "Alice and Bob are friends",
+        },
+        instructions = {
+            "Change Bob to Alice in the first three lines",
+            "",
+            "tips:",
+            ":%s/Bob/Alice/ changes the first occurrence of Bob to Alice",
+            ":%s/Bob/Alice/gc changes all occurrences of Bob to Alice with confirmation",
+            "V2j selects the first three lines",
+            "vip selects the current paragraph",
+            ":%s/Bob/Alice/g changes all occurrences of Bob to Alice",
+        },
+    },
 }
