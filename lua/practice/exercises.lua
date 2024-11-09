@@ -238,4 +238,36 @@ return {
             "FE can be used to navigate to the previous 'E' in the line",
         },
     },
+    {
+        input = {
+            "let a = 19999999;"
+        },
+        expected = {
+            "let a = 20000000;",
+        },
+        instructions = {
+            "Change 19999999 to 20000000",
+            "",
+            "tips",
+            "f1 to jump to the next '1' in the line",
+            "F9 to jump to the previous '9' in the line",
+            "Control-A to increment the number under the cursor",
+        },
+    },
+    {
+        input = {
+            "let a = 20000000;"
+        },
+        expected = {
+            "let a = 19999999;",
+        },
+        instructions = {
+            "Change 20000000 to 19999999",
+            "",
+            "tips",
+            "f2 to jump to the next '2' in the line",
+            "F0 to jump to the previous '0' in the line",
+            "Control-X to decrement the number under the cursor",
+        },
+    },
 }
