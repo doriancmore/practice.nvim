@@ -33,7 +33,11 @@ return {
             "DELETE THIS",
             "",
             "",
-            "DON'T TOUCH THIS",
+            "",
+            "",
+            "",
+            "",
+            "",
             "",
         },
         expected = {
@@ -41,7 +45,11 @@ return {
             "",
             "",
             "",
-            "DON'T TOUCH THIS",
+            "",
+            "",
+            "",
+            "",
+            "",
             "",
         },
         instructions = {
@@ -79,35 +87,6 @@ return {
             "Lowercase the word Over",
             "navigate with hjkl, or wWbB to move between words",
             "~ or vu to lowercase the character under the cursor",
-        },
-    },
-    {
-        input = {
-            "export default function test(a: number, b: string) {",
-            "    if (a > 0) {",
-            "      return b;",
-            "    }",
-            "}",
-        },
-        expected = {
-            "export default function test(a: number, b: string) {",
-            "    if (a > 25) {",
-            "      return b;",
-            "    }",
-            "}",
-        },
-        instructions = {
-            "Change the function to",
-            "export default function test(a: number, b: string) {",
-            "    if (a > 25) {",
-            "      return b;",
-            "    }",
-            "}",
-            "",
-            "suggestions:",
-            "ciw25",
-            "ciba > 25",
-            "f0 cw25",
         },
     },
     {
@@ -201,15 +180,17 @@ return {
     {
         input = {
             "const test = {",
-            "    two: 2,",
-            "    three: 3",
+            "    2,",
+            "    3,",
+            "    4,"
             "};",
         },
         expected = {
             "const test = {",
-            "    one: 1,",
-            "    two: 2,",
-            "    three: 3",
+            "    1,",
+            "    2,",
+            "    3,",
+            "    4,",
             "};",
         },
         cursor = {
@@ -218,9 +199,43 @@ return {
             instructions = "You will be moved to the }",
         },
         instructions = {
-            "Add a new line with 'one: 1,'",
-            "o to open a new line below the cursor",
+            "Add a new item 1 at the beginning of the array",
             "% to jump to the matching parenthesis",
+            "o to open a new line below the cursor",
+        },
+    },
+    {
+        input = {
+            "const test = [",
+            '    "foo",',
+            '    "bar",',
+            '    "baz",',
+            "];",
+        },
+        expected = {
+            "const test = 1;",
+        },
+        instructions = {
+            'Change the array into ["test"]',
+            "ca[1;",
+        },
+    },
+    {
+        input = {
+            "keep keep keep REMOVE keep keep",
+        },
+        expected = {
+            "keep keep keep keep keep",
+        },
+        instructions = {
+            "Remove the word 'REMOVE'",
+            "",
+            "tips:",
+            "dw deletes the next word",
+            "diw deletes the word under the cursor",
+            "db deletes the previous word",
+            "fR can be used to navigate to the next 'R' in the line",
+            "FE can be used to navigate to the previous 'E' in the line",
         },
     },
 }
