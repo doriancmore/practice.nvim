@@ -216,6 +216,8 @@ return {
     },
     {
         input = {
+            "const foo = 'foo';",
+            "",
             "const test = {",
             "    2,",
             "    3,",
@@ -223,6 +225,8 @@ return {
             "};",
         },
         expected = {
+            "const foo = 'foo';",
+            "",
             "const test = {",
             "    1,",
             "    2,",
@@ -231,7 +235,7 @@ return {
             "};",
         },
         cursor = {
-            line = 5,
+            line = 7,
             col = 0,
             instructions = "You will be moved to the }",
         },
