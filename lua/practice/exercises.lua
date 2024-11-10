@@ -400,4 +400,36 @@ return {
             "cab changes the parentheses and their content",
         },
     },
+    {
+        input = {
+            "struct Order {",
+            "    name: String,",
+            "    year: u32,",
+            "    made_by_phone: bool,",
+            "    made_by_mobile: bool,",
+            "    made_by_email: bool,",
+            "    item_number: u32,",
+            "    count: u32,",
+            "}",
+        },
+        expected = {
+            "#[derive(Debug)]",
+            "struct Order {",
+            "    name: String,",
+            "    year: u32,",
+            "    made_by_phone: bool,",
+            "    made_by_mobile: bool,",
+            "    made_by_email: bool,",
+            "    item_number: u32,",
+            "    count: u32,",
+            "}",
+        },
+        instructions = {
+            "Add the line '#[derive(Debug)]' above the struct",
+        },
+        hints = {
+            "gg to go to the top of the file",
+            "O to open a new line above the cursor",
+        },
+    },
 }
