@@ -535,4 +535,53 @@ return {
             "gcip to comment out the current paragraph",
         },
     },
+    {
+        input = {
+            "#[derive(Debug)]",
+            "pub enum Command {",
+            "    Ping,",
+            "    Echo(String),",
+            "    Set { key: String, value: String, exp: Option<u128> },",
+            "Get(String),",
+            "    Info(Vec<String>),",
+            "        ReplConf(Vec<String>),",
+            "    Psync(String, String)",
+            "},",
+        },
+        expected = {
+            "#[derive(Debug)]",
+            "pub enum Command {",
+            "    Ping,",
+            "    Echo(String),",
+            "    Set { key: String, value: String, exp: Option<u128> },",
+            "    Get(String),",
+            "    Info(Vec<String>),",
+            "    ReplConf(Vec<String>),",
+            "    Psync(String, String)",
+            "},",
+        },
+        instructions = {
+            "Fix the indentation",
+        },
+        hints = {
+            ">> to indent the current line",
+            "<< to unindent the current line",
+        },
+    },
+    {
+        input = {
+            'foo(["my string"]);',
+        },
+        expected = {
+            'foo("my string");',
+        },
+        instructions = {
+            "Remove the square brackets",
+        },
+        hints = {
+            'ya" to copy the quoted text',
+            "va[p to select the square brackets and the content",
+            "p to paste over the selection",
+        },
+    },
 }
