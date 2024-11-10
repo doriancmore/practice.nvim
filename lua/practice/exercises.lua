@@ -1,17 +1,39 @@
 return {
     {
         input = {
-            "Foo",
+            "Alice has 5 apples",
         },
         expected = {
-            "Bar",
+            "Bob has 5 apples",
         },
         instructions = {
-            "Replace Foo with Bar",
+            "Replace Alice with Bob",
+        },
+        cursor = {
+            line = 1,
+            col = 1,
         },
         hints = {
-            "ccBar",
-            "ciwBar",
+            "ciw to replace the word under the cursor",
+        },
+    },
+    {
+        input = {
+            "Lorem ipsum dolore sit amet",
+            "Bar",
+            "Baz",
+        },
+        expected = {
+            "Foo",
+            "Bar",
+            "Baz",
+        },
+        instructions = {
+            "Replace the first line with 'Foo'",
+        },
+        hints = {
+            "jk to navigate between lines",
+            "cc to replace the line",
         },
     },
     {
