@@ -1,6 +1,6 @@
 local M = {}
 
-local function show_pane(buf, height, width, row, col)
+local function show_pane(buf, height, width, row, col, title)
     return vim.api.nvim_open_win(buf, true, {
         relative = "editor",
         width = width,
@@ -9,6 +9,7 @@ local function show_pane(buf, height, width, row, col)
         col = col,
         style = "minimal",
         border = "rounded",
+        title = title,
     })
 end
 
@@ -30,10 +31,18 @@ local function show_window(bufs)
             practice_height,
             width,
             row + instructions_height + timer_height + gap * 2,
-            col
+            col,
+            "Exercise"
         ),
-        timer = show_pane(bufs.timer, timer_height, width, row, col),
-        instructions = show_pane(bufs.instructions, instructions_height, width, row + timer_height + gap, col),
+        timer = show_pane(bufs.timer, timer_height, width, row, col, "Timer"),
+        instructions = show_pane(
+            bufs.instructions,
+            instructions_height,
+            width,
+            row + timer_height + gap,
+            col,
+            "Instructions"
+        ),
     }
 
     vim.api.nvim_win_set_option(panes.practice, "relativenumber", true)
