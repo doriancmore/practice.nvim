@@ -436,4 +436,103 @@ return {
             "O to open a new line above the cursor",
         },
     },
+    {
+        input = {
+            "    et a = 1;",
+        },
+        expected = {
+            "    let a = 1;",
+        },
+        instructions = {
+            "Change 'et' to 'let'",
+        },
+        hints = {
+            "No hints for this one",
+        },
+    },
+    {
+        input = {
+            "    let myVar = 12345;oops",
+        },
+        expected = {
+            "    let myVar = 12345;",
+        },
+        instructions = {
+            "Remove the 'oops' at the end of the line",
+        },
+        hints = {
+            "$ to move to the end of the line",
+            "diw to delete the word under the cursor",
+        },
+    },
+    {
+        input = {
+            "    let myVar = 12345",
+        },
+        expected = {
+            "    let myVar = 12345;",
+        },
+        instructions = {
+            "Add a semicolon at the end of the line",
+        },
+        hints = {
+            "A to append at the end of the line",
+        },
+    },
+    {
+        input = {
+            'let myVar = "foo";',
+            'let myVar2 = "bar";',
+            '// let myVar3 = "baz";',
+        },
+        expected = {
+            '// let myVar = "foo";',
+            '// let myVar2 = "bar";',
+            '// let myVar3 = "baz";',
+        },
+        instructions = {
+            "Comment out the first two lines",
+        },
+        hints = {
+            "V to select the current line",
+            "j to move down",
+            "gc to comment/uncomment the selected lines",
+        },
+    },
+    {
+        input = {
+            '// let myVar = "foo";',
+        },
+        expected = {
+            'let myVar = "foo";',
+        },
+        instructions = {
+            "Remove the comment",
+        },
+        hints = {
+            "gcc to comment/uncomment the current line",
+        },
+    },
+    {
+        input = {
+            "let a = 1;",
+            "let b = 2;",
+            "let c = 3;",
+            "",
+            "let d = 4;",
+        },
+        expected = {
+            "// let a = 1;",
+            "// let b = 2;",
+            "// let c = 3;",
+            "",
+            "let d = 4;",
+        },
+        instructions = {
+            "Comment out the first three lines",
+        },
+        hints = {
+            "gcip to comment out the current paragraph",
+        },
+    },
 }
