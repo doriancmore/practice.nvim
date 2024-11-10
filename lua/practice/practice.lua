@@ -15,7 +15,7 @@ end
 
 local panes = {}
 
-local function show_window(bufs)
+local function show_window(bufs, settings)
     local gap = 2
 
     local width = math.floor(vim.o.columns * 0.4)
@@ -26,27 +26,54 @@ local function show_window(bufs)
     local total_height = instructions_height + menu_height + practice_height + gap * 4
 
     local row = math.floor((vim.o.lines - total_height) / 2)
-    local col = math.floor((vim.o.columns - width) / 2)
+    local left_col = math.floor(vim.o.columns * 0.1)
+    local right_col = left_col + width + gap
 
-    panes.timer = show_pane(bufs.timer, timer_height, width, row, col, "Timer")
-    panes.menu = show_pane(bufs.menu, menu_height, width, row + timer_height + gap, col, "Menu")
-    panes.instructions = show_pane(
-        bufs.instructions,
-        instructions_height,
-        width,
-        row + timer_height + menu_height + gap * 2,
-        col,
-        "Instructions"
-    )
-    panes.practice = show_pane(
-        bufs.practice,
-        practice_height,
-        width,
-        row + instructions_height + menu_height + timer_height + gap * 3,
-        col,
-        "Exercise"
-    )
+    if panes.timer == nil then
+        panes.timer = show_pane(bufs.timer, timer_height, width, row, left_col, "Timer")
+    end
 
+    if panes.menu == nil then
+        panes.menu = show_pane(bufs.menu, menu_height, width, row + timer_height + gap, left_col, "Menu")
+    end
+
+    if panes.instructions == nil then
+        panes.instructions = show_pane(
+            bufs.instructions,
+            instructions_height,
+            width,
+            row + timer_height + menu_height + gap * 2,
+            left_col,
+            "Instructions"
+        )
+    end
+
+    if panes.practice == nil then
+        panes.practice = show_pane(
+            bufs.practice,
+            practice_height,
+            width,
+            row + instructions_height + menu_height + timer_height + gap * 3,
+            left_col,
+            "Exercise"
+        )
+    end
+
+    if panes.hints == nil and settings.show_hints then
+        panes.hints = show_pane(
+            bufs.hints,
+            instructions_height,
+            width,
+            row + menu_height + timer_height + gap * 2,
+            left_col + width + gap,
+            "Hints"
+        )
+    elseif panes.hints and settings.show_hints == false then
+        vim.api.nvim_win_close(panes.hints, true)
+        panes.hints = nil
+    end
+
+    vim.api.nvim_set_current_win(panes.menu)
     vim.api.nvim_win_set_option(panes.practice, "relativenumber", true)
 end
 
@@ -96,6 +123,7 @@ function M.start(bufs, exercise, callback)
             vim.api.nvim_buf_delete(bufs.timer, { force = true })
             vim.api.nvim_buf_delete(bufs.instructions, { force = true })
             vim.api.nvim_buf_delete(bufs.menu, { force = true })
+            panes = {}
             vim.api.nvim_command("stopinsert")
             callback(elapsed_time)
         end
@@ -112,6 +140,7 @@ function M.open(exercise, callback)
         instructions = vim.api.nvim_create_buf(false, true),
         practice = vim.api.nvim_create_buf(false, true),
         timer = vim.api.nvim_create_buf(false, true),
+        hints = vim.api.nvim_create_buf(false, true),
     }
 
     local function start()
@@ -119,26 +148,21 @@ function M.open(exercise, callback)
         M.start(bufs, exercise, callback)
     end
 
-    bufs.menu =
-        require("practice.menu").init(function()
-            vim.api.nvim_set_current_win(panes.practice)
-            start()
-        end), vim.api.nvim_buf_set_lines(bufs.practice, 0, -1, false, exercise.input)
+    bufs.menu = require("practice.menu").init(function()
+        vim.api.nvim_set_current_win(panes.practice)
+        start()
+    end, function(settings)
+        show_window(bufs, settings)
+    end)
 
-    if exercise.cursor then
-        table.insert(exercise.instructions, exercise.cursor.instructions)
-    else
-        table.insert(exercise.instructions, random_pos_instructions)
-    end
-
+    vim.api.nvim_buf_set_lines(bufs.practice, 0, -1, false, exercise.input)
     vim.api.nvim_buf_set_lines(bufs.instructions, 0, -1, false, exercise.instructions)
     vim.api.nvim_buf_set_lines(bufs.timer, 0, -1, false, { "Timer: 0.00s" })
+    vim.api.nvim_buf_set_lines(bufs.hints, 0, -1, false, exercise.hints)
 
-    show_window(bufs)
+    show_window(bufs, {})
 
-    vim.api.nvim_set_current_win(panes.menu)
     vim.api.nvim_win_set_cursor(panes.menu, { 2, 1 })
-
     vim.api.nvim_create_autocmd("BufEnter", {
         buffer = bufs.practice,
         callback = start,

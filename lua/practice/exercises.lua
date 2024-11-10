@@ -9,7 +9,7 @@ return {
         instructions = {
             "Replace Foo with Bar",
         },
-        hint = {
+        hints = {
             "ccBar",
             "ciwBar",
         },
@@ -24,7 +24,7 @@ return {
         instructions = {
             "Replace Bar with Baz",
         },
-        hint = {
+        hints = {
             "hjkl to move around, wWbB to move between words",
             "ciwBaz to replace the word under the cursor",
             "cwBaz if at the beginning of the word",
@@ -60,7 +60,7 @@ return {
         instructions = {
             "Delete the line with DELETE THIS",
         },
-        hint = {
+        hints = {
             "#j to move to the line, if the line is below your cursor  (ex 3j)",
             "#k to move to the line above your cursor (ex 3k)",
             "dd to delete the line",
@@ -80,7 +80,7 @@ return {
         instructions = {
             "Capitalize the first letter of bar",
         },
-        hint = {
+        hints = {
             "navigate with hjkl, or wWbB to move between words",
             "~ or vU to capitalize the character under the cursor",
         },
@@ -95,7 +95,7 @@ return {
         instructions = {
             "Lowercase the word Over",
         },
-        hint = {
+        hints = {
             "navigate with hjkl, or wWbB to move between words",
             "~ or vu to lowercase the character under the cursor",
         },
@@ -119,7 +119,7 @@ return {
             "    return foo.baz;",
             "}",
         },
-        hint = {
+        hints = {
             "cibfoo: Bar",
             "ciBreturn foo.baz;",
         },
@@ -142,7 +142,7 @@ return {
         instructions = {
             "Fix the typo in the third line",
         },
-        hint = {
+        hints = {
             "fr to jump to the next 'r' in the line",
             "Fr to jump to the previous 'r' in the line",
             "; afterwards to go to the next occurrence",
@@ -163,7 +163,7 @@ return {
         instructions = {
             "Combine the lines into a single line",
         },
-        hint = {
+        hints = {
             "J to join the line below the cursor",
             "gJ to join the line without adding a space",
         },
@@ -188,7 +188,7 @@ return {
             "    two: 2,",
             "};",
         },
-        hint = {
+        hints = {
             'ca" 1',
         },
     },
@@ -216,7 +216,7 @@ return {
         instructions = {
             "Add a new item 1 at the beginning of the array",
         },
-        hint = {
+        hints = {
             "% to jump to the matching parenthesis",
             "o to open a new line below the cursor",
         },
@@ -235,7 +235,7 @@ return {
         instructions = {
             'Change the array into "const test = 1;"',
         },
-        hint = {
+        hints = {
             "ca[1;",
         },
     },
@@ -249,7 +249,7 @@ return {
         instructions = {
             "Remove the word 'REMOVE'",
         },
-        hint = {
+        hints = {
             "dw deletes the next word",
             "diw deletes the word under the cursor",
             "db deletes the previous word",
@@ -267,7 +267,7 @@ return {
         instructions = {
             "Change 19999999 to 20000000",
         },
-        hint = {
+        hints = {
             "f1 to jump to the next '1' in the line",
             "F9 to jump to the previous '9' in the line",
             "Control-A to increment the number under the cursor",
@@ -283,7 +283,7 @@ return {
         instructions = {
             "Change 20000000 to 19999999",
         },
-        hint = {
+        hints = {
             "f2 to jump to the next '2' in the line",
             "F0 to jump to the previous '0' in the line",
             "Control-X to decrement the number under the cursor",
@@ -303,7 +303,7 @@ return {
         instructions = {
             "Delete the first key binding",
         },
-        hint = {
+        hints = {
             "dip deletes the current paragraph",
             "dd deletes a line",
             "d3d deletes 3 lines",
@@ -330,7 +330,7 @@ return {
         instructions = {
             "Duplicate the first three lines",
         },
-        hint = {
+        hints = {
             "yip copies the current paragraph",
             "P pastes the copied paragraph above the cursor",
         },
@@ -353,7 +353,7 @@ return {
         instructions = {
             "Change Bob to Alice in the first three lines",
         },
-        hint = {
+        hints = {
             ":%s/Bob/Alice/ changes the first occurrence of Bob to Alice",
             ":%s/Bob/Alice/gc changes all occurrences of Bob to Alice with confirmation",
             "V2j selects the first three lines",
@@ -371,7 +371,7 @@ return {
         instructions = {
             "Remove the parentheses and their content",
         },
-        hint = {
+        hints = {
             "dib deletes the text inside the parentheses",
             "dab deletes the parentheses and their content",
             "cib changes the text inside the parentheses",
