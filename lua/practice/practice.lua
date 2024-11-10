@@ -155,6 +155,8 @@ function M.open(exercise, callback)
         hints = vim.api.nvim_create_buf(false, true),
     }
 
+    vim.api.nvim_buf_set_option(bufs.practice, "commentstring", "// %s")
+
     local function start()
         vim.api.nvim_clear_autocmds({ buffer = bufs.practice, event = "BufEnter" })
         M.start(bufs, exercise, callback)
