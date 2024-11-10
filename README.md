@@ -32,7 +32,7 @@ Lazy
         local practice = require('practice')
         practice.setup()
         vim.keymap.set("n", "<leader>pc", function()
-            practice.start(10)
+            practice.open(10)
         end, { desc = "Practice" })
     end
 }
