@@ -216,7 +216,7 @@ return {
             "const test = 1;",
         },
         instructions = {
-            'Change the array into ["test"]',
+            'Change the array into "const test = 1;"',
             "ca[1;",
         },
     },
@@ -240,7 +240,7 @@ return {
     },
     {
         input = {
-            "let a = 19999999;"
+            "let a = 19999999;",
         },
         expected = {
             "let a = 20000000;",
@@ -256,7 +256,7 @@ return {
     },
     {
         input = {
-            "let a = 20000000;"
+            "let a = 20000000;",
         },
         expected = {
             "let a = 19999999;",
@@ -272,14 +272,14 @@ return {
     },
     {
         input = {
-            "vim.keymap.set('n', 'gf', function()"
-            "    print('Go to file')"
+            "vim.keymap.set('n', 'gf', function()",
+            "    print('Go to file')",
             "end, { noremap = true })",
             "",
             "vim.keymap.set({'i', 'c'}, 'jj', '<esc>', {})",
         },
         expected = {
-            "vim.keymap.set({'i', 'c'}, 'jk', '<esc>', {})",
+            "vim.keymap.set({'i', 'c'}, 'jj', '<esc>', {})",
         },
         instructions = {
             "Delete the first key binding",
