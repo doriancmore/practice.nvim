@@ -103,7 +103,7 @@ return {
             "Capitalize the first letter of bar",
         },
         hints = {
-            "navigate with hjkl, or wWbB to move between words",
+            "navigate with hjkl",
             "~ or vU to capitalize the character under the cursor",
         },
     },
@@ -118,7 +118,7 @@ return {
             "Lowercase the word Over",
         },
         hints = {
-            "navigate with hjkl, or wWbB to move between words",
+            "search with fO",
             "~ or vu to lowercase the character under the cursor",
         },
     },
@@ -262,7 +262,7 @@ return {
             'Change the array into "const test = 1;"',
         },
         hints = {
-            "ca[1;",
+            "ca[1",
         },
     },
     {
