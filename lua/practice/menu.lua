@@ -40,6 +40,23 @@ M.init = function(start, update_settings)
         end,
     })
 
+    vim.api.nvim_create_autocmd("CursorMoved", {
+        buffer = menu_buf,
+        callback = function()
+            local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+
+            col = 1
+
+            if row < 2 then
+                row = 2
+            elseif row > 3 then
+                row = 3
+            end
+
+            vim.api.nvim_win_set_cursor(0, { row, col })
+        end,
+    })
+
     local show_menu_text = function()
         local menu_text = get_menu_text()
         vim.api.nvim_buf_set_lines(menu_buf, 0, -1, false, menu_text)
