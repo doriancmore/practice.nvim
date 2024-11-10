@@ -59,6 +59,17 @@ local function show_window(bufs, settings)
         )
     end
 
+    if panes.expected == nil then
+        panes.expected = show_pane(
+            bufs.expected,
+            practice_height,
+            width,
+            row + instructions_height + menu_height + timer_height + gap * 3,
+            right_col,
+            "Expected"
+        )
+    end
+
     if panes.hints == nil and settings.show_hints then
         panes.hints = show_pane(
             bufs.hints,
@@ -75,6 +86,7 @@ local function show_window(bufs, settings)
 
     vim.api.nvim_set_current_win(panes.menu)
     vim.api.nvim_win_set_option(panes.practice, "relativenumber", true)
+    vim.api.nvim_win_set_option(panes.expected, "relativenumber", true)
 end
 
 local function update_timer(timer_buf, start_time)
@@ -119,10 +131,9 @@ function M.start(bufs, exercise, callback)
 
             local elapsed_time = (vim.loop.now() - start_time) / 1000
 
-            vim.api.nvim_buf_delete(bufs.practice, { force = true })
-            vim.api.nvim_buf_delete(bufs.timer, { force = true })
-            vim.api.nvim_buf_delete(bufs.instructions, { force = true })
-            vim.api.nvim_buf_delete(bufs.menu, { force = true })
+            for _, buf in pairs(bufs) do
+                vim.api.nvim_buf_delete(buf, { force = true })
+            end
             panes = {}
             vim.api.nvim_command("stopinsert")
             callback(elapsed_time)
@@ -139,6 +150,7 @@ function M.open(exercise, callback)
     local bufs = {
         instructions = vim.api.nvim_create_buf(false, true),
         practice = vim.api.nvim_create_buf(false, true),
+        expected = vim.api.nvim_create_buf(false, true),
         timer = vim.api.nvim_create_buf(false, true),
         hints = vim.api.nvim_create_buf(false, true),
     }
@@ -156,6 +168,7 @@ function M.open(exercise, callback)
     end)
 
     vim.api.nvim_buf_set_lines(bufs.practice, 0, -1, false, exercise.input)
+    vim.api.nvim_buf_set_lines(bufs.expected, 0, -1, false, exercise.expected)
     vim.api.nvim_buf_set_lines(bufs.instructions, 0, -1, false, exercise.instructions)
     vim.api.nvim_buf_set_lines(bufs.timer, 0, -1, false, { "Timer: 0.00s" })
     vim.api.nvim_buf_set_lines(bufs.hints, 0, -1, false, exercise.hints)
