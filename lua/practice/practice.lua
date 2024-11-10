@@ -45,7 +45,9 @@ local function update_timer(timer_buf, start_time)
     local elapsed_time = (vim.loop.now() - start_time) / 1000
     local timer_text = string.format("Timer: %.2f s", elapsed_time)
 
-    vim.api.nvim_buf_set_lines(timer_buf, 0, -1, false, { timer_text })
+    if vim.api.nvim_buf_is_valid(timer_buf) then
+        vim.api.nvim_buf_set_lines(timer_buf, 0, -1, false, { timer_text })
+    end
 end
 
 function M.start(panes, bufs, exercise, callback)
@@ -78,7 +80,7 @@ function M.start(panes, bufs, exercise, callback)
         local expected = table.concat(exercise.expected, "\n")
 
         if actual == expected then
-            timer_handle:stop()
+            timer_handle:close()
 
             local elapsed_time = (vim.loop.now() - start_time) / 1000
 
