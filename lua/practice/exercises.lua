@@ -447,7 +447,7 @@ return {
             "Change 'et' to 'let'",
         },
         hints = {
-            "No hints for this one",
+            "Press `I` to insert at the beginning of the line",
         },
     },
     {
