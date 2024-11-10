@@ -5,7 +5,7 @@ M.init = function(start, update_settings)
 
     local get_menu_text = function()
         return {
-            "Place an X in the [ ] to activate ",
+            "Press f in the [ ] to toggle",
             "[ ] Begin",
             string.format("[%s] Toggle hints", settings.show_hints and "X" or " "),
         }
@@ -23,6 +23,23 @@ M.init = function(start, update_settings)
         end,
     }
     local menu_buf = vim.api.nvim_create_buf(false, true)
+
+    vim.api.nvim_buf_set_keymap(menu_buf, "n", "f", "", {
+        noremap = true,
+        silent = true,
+        callback = function()
+            local line = vim.fn.getline(".")
+            local col = vim.fn.col(".") - 1
+            local char = vim.fn.strpart(line, col, 1)
+
+            if string.lower(char) == "x" then
+                vim.cmd("normal! r ")
+            else
+                vim.cmd("normal! rx")
+            end
+        end,
+    })
+
     local show_menu_text = function()
         local menu_text = get_menu_text()
         vim.api.nvim_buf_set_lines(menu_buf, 0, -1, false, menu_text)
